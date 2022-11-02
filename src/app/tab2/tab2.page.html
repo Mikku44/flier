@@ -1,17 +1,23 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-button slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+    <ion-title>camera</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-button expand="full" shape="round" (click)="takePicture()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    ถ่ายภาพ
+  </ion-button>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <img [src]="imageSrc"/>
+
+  <ion-button *ngIf="capturedImage" expand="full" shape="round" (click)="sharePicture()">
+    <ion-icon slot="start" name="share-social"></ion-icon>
+    แชร์รูปภาพ
+  </ion-button>
+
 </ion-content>
