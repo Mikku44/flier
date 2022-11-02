@@ -10,7 +10,9 @@ import { Share } from '@capacitor/share';
 export class Tab2Page implements OnInit {
   capturedImage: any;
   imageSrc: any;
+
   constructor() { }
+
   ngOnInit() { }
 
   async takePicture() {
@@ -23,8 +25,9 @@ export class Tab2Page implements OnInit {
     this.imageSrc = image.webPath;
   }
 
-  async sharePicture(){
+  async sharePicture() {
     await Share.share({ url: this.capturedImage.path });
   }
+
 
 }

@@ -17,13 +17,22 @@
       </ion-fab>
     </ion-toolbar>
   </ion-header>
+
   <ion-fab vertical="center" horizontal="center" slot="fixed">
    <ion-fab-button color="white">
      <ion-icon name="laptop-outline"></ion-icon>
    </ion-fab-button>
     </ion-fab>
    <ion-fab class="btn" vertical="bottom"  horizontal="start" slot="fixed" >
-      <ion-button color="primary" expand="full"  shape="round">Choose files</ion-button>
+      <ion-button color="primary" expand="full" (click)="submitForm()" shape="round">send files</ion-button>
    </ion-fab>
+
+   <div id="container">
+    <ion-item>
+      <input type="file" (change)="onFileChange($event)" />
+    </ion-item>
+
+   </div>
+
 
 </ion-content>
