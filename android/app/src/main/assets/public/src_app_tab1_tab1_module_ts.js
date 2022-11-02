@@ -96,13 +96,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _tab1_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tab1.page.html?ngResource */ 3852);
 /* harmony import */ var _tab1_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab1.page.scss?ngResource */ 8165);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
 
 
 
 
 let Tab1Page = class Tab1Page {
-    constructor() { }
+    constructor(navCtrl
+    // private http: HttpClient
+    ) {
+        this.navCtrl = navCtrl;
+    }
     onFileChange(fileChangeEvent) {
         this.file = fileChangeEvent.target.files[0];
     }
@@ -115,10 +121,15 @@ let Tab1Page = class Tab1Page {
             // });
         });
     }
+    gotoContactPage() {
+        this.navCtrl.navigateForward('mycontact');
+    }
 };
-Tab1Page.ctorParameters = () => [];
+Tab1Page.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController }
+];
 Tab1Page = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-tab1',
         template: _tab1_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_tab1_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -135,7 +146,7 @@ Tab1Page = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
   \************************************************/
 /***/ ((module) => {
 
-module.exports = ".btn {\n  width: 92%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjEucGFnZS5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXC4uXFxKdW5pb3IlMjAoMylzZW1zZXRlciUyMDFcXDg3MS0yMjYlMjBNT0JJTEUlMjBBUFBMSUNBVElPTiUyMERFVkVMT1BNRU5UXFw2MzIwNjEwMDEwXFxNaW5pcHJvamVjdDY1XFxmbGllclxcc3JjXFxhcHBcXHRhYjFcXHRhYjEucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBQTtBQ0NGIiwiZmlsZSI6InRhYjEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJ0bntcclxuICB3aWR0aDo5MiU7XHJcbn1cclxuIiwiLmJ0biB7XG4gIHdpZHRoOiA5MiU7XG59Il19 */";
+module.exports = ".btn {\n  width: 92%;\n}\n\n.contact {\n  right: 0;\n  position: fixed;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjEucGFnZS5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFxNb2JpbGUlMjBBcHBcXGZsaWVyXFxzcmNcXGFwcFxcdGFiMVxcdGFiMS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxVQUFBO0FDQ0Y7O0FEQ0E7RUFDRSxRQUFBO0VBQ0EsZUFBQTtBQ0VGIiwiZmlsZSI6InRhYjEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJ0bntcclxuICB3aWR0aDo5MiU7XHJcbn1cclxuLmNvbnRhY3R7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG59XHJcblxyXG4iLCIuYnRuIHtcbiAgd2lkdGg6IDkyJTtcbn1cblxuLmNvbnRhY3Qge1xuICByaWdodDogMDtcbiAgcG9zaXRpb246IGZpeGVkO1xufSJdfQ== */";
 
 /***/ }),
 
@@ -145,7 +156,7 @@ module.exports = ".btn {\n  width: 92%;\n}\n/*# sourceMappingURL=data:applicatio
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Tab 1\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\" vertical=\"center\" horizontal=\"start\">Flier</ion-title>\r\n      <ion-fab horizontal=\"end\" class=\"iontoolbar\">\r\n        <ion-fab-button color=\"clear\">\r\n          <ion-icon   name=\"chatbubbles-outline\"></ion-icon>\r\n        </ion-fab-button>\r\n      </ion-fab>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n  <ion-fab vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\r\n   <ion-fab-button color=\"white\">\r\n     <ion-icon name=\"laptop-outline\"></ion-icon>\r\n   </ion-fab-button>\r\n    </ion-fab>\r\n   <ion-fab class=\"btn\" vertical=\"bottom\"  horizontal=\"start\" slot=\"fixed\" >\r\n      <ion-button color=\"primary\" expand=\"full\" (click)=\"submitForm()\" shape=\"round\">send files</ion-button>\r\n   </ion-fab>\r\n\r\n   <div id=\"container\">\r\n    <ion-item>\r\n      <input type=\"file\" (change)=\"onFileChange($event)\" />\r\n    </ion-item>\r\n\r\n   </div>\r\n\r\n\r\n</ion-content>\r\n";
+module.exports = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Tab 1\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\" vertical=\"center\" horizontal=\"start\" class=\"font\">Flier</ion-title>\r\n    <ion-button class=\"contact\" (click)=\"gotoContactPage()\"color=\"light\">\r\n      <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n    </ion-button>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n\r\n  <ion-fab vertical=\"center\" horizontal=\"center\" slot=\"fixed\">\r\n   <ion-fab-button color=\"white\">\r\n     <ion-icon name=\"laptop-outline\"></ion-icon>\r\n   </ion-fab-button>\r\n    </ion-fab>\r\n   <ion-fab class=\"btn\" vertical=\"bottom\"  horizontal=\"start\" slot=\"fixed\" >\r\n      <ion-button color=\"primary\" expand=\"full\" (click)=\"submitForm()\" shape=\"round\">send files</ion-button>\r\n   </ion-fab>\r\n\r\n   <div id=\"container\">\r\n    <ion-item>\r\n      <input type=\"file\" (change)=\"onFileChange($event)\" />\r\n    </ion-item>\r\n\r\n   </div>\r\n\r\n\r\n</ion-content>\r\n";
 
 /***/ })
 

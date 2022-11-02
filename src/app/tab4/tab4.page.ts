@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { AppModule } from '../app.module';
-import { doc, Firestore, getFirestore } from 'firebase/firestore';
-import {
-  collection,
-  addDoc,
-  setDoc,
-  getDoc,
-  getDocFromCache,
-} from 'firebase/firestore';
+import { doc, Firestore, getFirestore, onSnapshot } from 'firebase/firestore';
+
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -30,21 +24,18 @@ export class Tab4Page implements OnInit {
 
   async test() {
     const docRef = doc(this.db, 'users', 'sm-001');
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      this.numOfSize = data.numOfSize;
-      this.numOfSent = data.numOfSent;
-      this.numOfSent = data.numOfSent;
-      this.numOfRev = data.numOfRev;
-      this.numOfSRev = data.numOfSRev;
-      this.percent  = this.numOfSize*100/10240;
-    } else {
-      this.numOfSize = 0;
-      this.numOfSent = 0;
-      this.numOfSent = 0;
-      this.numOfRev = 0;
-      this.numOfSRev = 0;
-    }
+    onSnapshot(
+      doc(this.db, 'users', 'sm-001'),
+      { includeMetadataChanges: true },
+      (data) => {
+        this.numOfSize = data.data().numOfSize;
+        this.numOfSent = data.data().numOfSent;
+        this.numOfSent = data.data().numOfSent;
+        this.numOfRev = data.data().numOfRev;
+        this.numOfSRev = data.data().numOfSRev;
+        this.percent = (this.numOfSize * 100) / 10240;
+      }
+    );
+
   }
 }

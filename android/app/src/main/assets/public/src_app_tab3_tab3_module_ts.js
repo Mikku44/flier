@@ -93,12 +93,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Tab3Page": () => (/* binding */ Tab3Page)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _tab3_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tab3.page.html?ngResource */ 9769);
 /* harmony import */ var _tab3_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab3.page.scss?ngResource */ 7087);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 2816);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 2816);
+/* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app.module */ 6747);
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 1866);
+
+
 
 
 
@@ -112,9 +116,17 @@ let Tab3Page = class Tab3Page {
         this.handlerMessage = '';
         this.roleMessage = '';
         this.component = Tab3Page;
+        this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)(_app_module__WEBPACK_IMPORTED_MODULE_2__.AppModule.app);
+        this.callSender();
+    }
+    callSender() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'users', 'sm-001');
+            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.onSnapshot)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'users', 'sm-001'), { includeMetadataChanges: true }, (data) => { });
+        });
     }
     presentAlert() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Warning',
                 subHeader: '',
@@ -144,11 +156,11 @@ let Tab3Page = class Tab3Page {
     }
 };
 Tab3Page.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.AlertController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router }
 ];
-Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-tab3',
         template: _tab3_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_tab3_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -165,7 +177,7 @@ Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
   \************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar-title {\n  display: flex;\n}\n\n.icon {\n  font-size: 20vh;\n}\n\n.textdes {\n  font-size: 2vw;\n}\n\n.btn {\n  width: 92%;\n}\n\n.content {\n  background-color: #131313;\n  color: white;\n  height: 45vh;\n  border-radius: 20px 20px 0 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjMucGFnZS5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXC4uXFxKdW5pb3IlMjAoMylzZW1zZXRlciUyMDFcXDg3MS0yMjYlMjBNT0JJTEUlMjBBUFBMSUNBVElPTiUyMERFVkVMT1BNRU5UXFw2MzIwNjEwMDEwXFxNaW5pcHJvamVjdDY1XFxmbGllclxcc3JjXFxhcHBcXHRhYjNcXHRhYjMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0UsYUFBQTtBQ0FGOztBREdBO0VBQ0UsZUFBQTtBQ0FGOztBREdBO0VBQ0UsY0FBQTtBQ0FGOztBREVBO0VBQ0UsVUFBQTtBQ0NGOztBRENBO0VBQ0UseUJBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDRCQUFBO0FDRUYiLCJmaWxlIjoidGFiMy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuLnRvb2xiYXItdGl0bGV7XHJcbiAgZGlzcGxheTpmbGV4O1xyXG59XHJcblxyXG4uaWNvbntcclxuICBmb250LXNpemU6MjB2aDtcclxuXHJcbn1cclxuLnRleHRkZXN7XHJcbiAgZm9udC1zaXplOjJ2dztcclxufVxyXG4uYnRue1xyXG4gIHdpZHRoOjkyJTtcclxufVxyXG4uY29udGVudHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiMxMzEzMTM7XHJcbiAgY29sb3I6d2hpdGU7XHJcbiAgaGVpZ2h0OjQ1dmg7XHJcbiAgYm9yZGVyLXJhZGl1czogMjBweCAyMHB4IDAgMDtcclxufVxyXG5cclxuIiwiLnRvb2xiYXItdGl0bGUge1xuICBkaXNwbGF5OiBmbGV4O1xufVxuXG4uaWNvbiB7XG4gIGZvbnQtc2l6ZTogMjB2aDtcbn1cblxuLnRleHRkZXMge1xuICBmb250LXNpemU6IDJ2dztcbn1cblxuLmJ0biB7XG4gIHdpZHRoOiA5MiU7XG59XG5cbi5jb250ZW50IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzEzMTMxMztcbiAgY29sb3I6IHdoaXRlO1xuICBoZWlnaHQ6IDQ1dmg7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHggMjBweCAwIDA7XG59Il19 */";
+module.exports = ".toolbar-title {\n  display: flex;\n}\n\n.icon {\n  font-size: 20vh;\n}\n\n.textdes {\n  font-size: 2vw;\n}\n\n.btn {\n  width: 92%;\n}\n\n.content {\n  background-color: #131313;\n  color: white;\n  height: 45vh;\n  border-radius: 20px 20px 0 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjMucGFnZS5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFxNb2JpbGUlMjBBcHBcXGZsaWVyXFxzcmNcXGFwcFxcdGFiM1xcdGFiMy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDRSxhQUFBO0FDQUY7O0FER0E7RUFDRSxlQUFBO0FDQUY7O0FER0E7RUFDRSxjQUFBO0FDQUY7O0FERUE7RUFDRSxVQUFBO0FDQ0Y7O0FEQ0E7RUFDRSx5QkFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsNEJBQUE7QUNFRiIsImZpbGUiOiJ0YWIzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4udG9vbGJhci10aXRsZXtcclxuICBkaXNwbGF5OmZsZXg7XHJcbn1cclxuXHJcbi5pY29ue1xyXG4gIGZvbnQtc2l6ZToyMHZoO1xyXG5cclxufVxyXG4udGV4dGRlc3tcclxuICBmb250LXNpemU6MnZ3O1xyXG59XHJcbi5idG57XHJcbiAgd2lkdGg6OTIlO1xyXG59XHJcbi5jb250ZW50e1xyXG4gIGJhY2tncm91bmQtY29sb3I6IzEzMTMxMztcclxuICBjb2xvcjp3aGl0ZTtcclxuICBoZWlnaHQ6NDV2aDtcclxuICBib3JkZXItcmFkaXVzOiAyMHB4IDIwcHggMCAwO1xyXG59XHJcblxyXG4iLCIudG9vbGJhci10aXRsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG59XG5cbi5pY29uIHtcbiAgZm9udC1zaXplOiAyMHZoO1xufVxuXG4udGV4dGRlcyB7XG4gIGZvbnQtc2l6ZTogMnZ3O1xufVxuXG4uYnRuIHtcbiAgd2lkdGg6IDkyJTtcbn1cblxuLmNvbnRlbnQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTMxMzEzO1xuICBjb2xvcjogd2hpdGU7XG4gIGhlaWdodDogNDV2aDtcbiAgYm9yZGVyLXJhZGl1czogMjBweCAyMHB4IDAgMDtcbn0iXX0= */";
 
 /***/ }),
 
@@ -175,7 +187,7 @@ module.exports = ".toolbar-title {\n  display: flex;\n}\n\n.icon {\n  font-size:
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\r\n  <meta name=\"color-scheme\" content=\"light dark\" />\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      <h1 class=\"ion-text-center\">Flier</h1>\r\n      <!-- <ion-icon name=\"chatbubbles-outline\"></ion-icon> -->\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content  [fullscreen]=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Receive</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n<ion-grid >\r\n  <ion-row class=\"ion-justify-content-center ion-align-items-center\">\r\n    <ion-col>\r\n  <div class=\"ion-text-center\">\r\n    <ion-icon class=\"icon\"  name=\"cloud-download-outline\"></ion-icon>\r\n    <div class=\"textdes\">Device Name <br> (Device Name)</div>\r\n  </div>\r\n  </ion-col>\r\n  </ion-row>\r\n</ion-grid>\r\n\r\n<ion-grid class=\"content\">\r\n  <ion-row class=\"ion-justify-content-center \">\r\n    <div>\r\n      <ion-spinner  name=\"dots\" color=\"medium\"></ion-spinner>\r\n    </div>\r\n  </ion-row>\r\n  <ion-row class=\"ion-justify-content-center \">\r\n    <div>Waiting for sender</div>\r\n  </ion-row>\r\n</ion-grid>\r\n\r\n<ion-fab class=\"btn\" vertical=\"bottom\"  horizontal=\"start\" slot=\"fixed\" >\r\n  <ion-button color=\"primary\" expand=\"full\" (click)=\"presentAlert()\"  shape=\"round\">Choose files</ion-button>\r\n</ion-fab>\r\n</ion-content>\r\n\r\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <meta name=\"color-scheme\" content=\"light dark\" />\n  <ion-toolbar>\n    <ion-title>\n      <h1 class=\"ion-text-center\">Flier</h1>\n      <!-- <ion-icon name=\"chatbubbles-outline\"></ion-icon> -->\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Receive</ion-title>\n    </ion-toolbar>\n  </ion-header>\n<ion-grid >\n  <ion-row class=\"ion-justify-content-center ion-align-items-center\">\n    <ion-col>\n  <div class=\"ion-text-center\">\n    <ion-icon class=\"icon\"  name=\"cloud-download-outline\"></ion-icon>\n    <div class=\"textdes\">Device Name <br> (Device Name)</div>\n  </div>\n  </ion-col>\n  </ion-row>\n</ion-grid>\n\n<ion-grid class=\"content\">\n  <ion-row class=\"ion-justify-content-center \">\n    <div>\n      <ion-spinner  name=\"dots\" color=\"medium\"></ion-spinner>\n    </div>\n  </ion-row>\n  <ion-row class=\"ion-justify-content-center \">\n    <div>Waiting for sender</div>\n  </ion-row>\n</ion-grid>\n\n<ion-fab class=\"btn\" vertical=\"bottom\"  horizontal=\"start\" slot=\"fixed\" >\n  <ion-button color=\"primary\" expand=\"full\" (click)=\"presentAlert()\"  shape=\"round\">Choose files</ion-button>\n</ion-fab>\n</ion-content>\n\n";
 
 /***/ })
 

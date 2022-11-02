@@ -34,11 +34,11 @@ const routes = [
             },
             {
                 path: 'tab3',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tab3_tab3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab3/tab3.module */ 3746)).then(m => m.Tab3PageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_firebase_firestore_dist_index_esm_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_tab3_tab3_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab3/tab3.module */ 3746)).then(m => m.Tab3PageModule)
             },
             {
                 path: 'tab4',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_tab4_tab4_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../tab4/tab4.module */ 2486)).then(m => m.Tab4PageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_firebase_firestore_dist_index_esm_js"), __webpack_require__.e("src_app_tab4_tab4_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab4/tab4.module */ 2486)).then(m => m.Tab4PageModule)
             },
             {
                 path: '',
@@ -157,7 +157,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"tab1\">\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon name=\"paper-plane-outline\"></ion-icon>\r\n      <ion-label>Send</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\">\r\n      <ion-icon name=\"images-outline\"></ion-icon>\r\n      <ion-label>Send Photo</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"file-tray-full-outline\"></ion-icon>\r\n      <ion-label>Receive</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab4\">\r\n      <ion-icon name=\"layers-outline\"></ion-icon>\r\n      <ion-label>History</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n";
+module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"tab1\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"paper-plane-outline\"></ion-icon>\n      <ion-label>Send</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"images-outline\"></ion-icon>\n      <ion-label>Send Photo</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"file-tray-full-outline\"></ion-icon>\n      <ion-label>Receive</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab4\">\n      <ion-icon name=\"layers-outline\"></ion-icon>\n      <ion-label>History</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
 
 /***/ })
 

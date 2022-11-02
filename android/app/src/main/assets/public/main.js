@@ -25,6 +25,10 @@ const routes = [
     {
         path: 'download',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_download_download_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./download/download.module */ 7976)).then(m => m.DownloadPageModule)
+    },
+    {
+        path: 'mycontact',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_mycontact_mycontact_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./mycontact/mycontact.module */ 2449)).then(m => m.MycontactPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -112,8 +116,10 @@ const firebaseConfig = {
 
 
 
-const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
 let AppModule = class AppModule {
+    constructor() {
+        this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
+    }
 };
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
@@ -447,7 +453,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n";
+module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n";
 
 /***/ })
 

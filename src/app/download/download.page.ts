@@ -44,7 +44,7 @@ export class DownloadPage implements OnInit {
           text: 'Accept',
           role: 'confirm',
           handler: () => {
-            this.router.navigate(['/tabs']);
+            this.router.navigate(['/tabs/tab3']);
           },
         },
       ],
