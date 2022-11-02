@@ -9,7 +9,7 @@ ion-card {
 
   padding: 25%;
   margin: 2px;
-  background-color: #f1f1f1;
+  // background: #f1f1f1;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -22,4 +22,7 @@ ion-card {
 }
 .bg{
   background-color:#ed5252;
+}
+.storage{
+  display:flex;
 }

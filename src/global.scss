@@ -30,7 +30,35 @@
 button.alert-button.alert-button-cancel{
   color:#F64B4B;
 }
-content
-{
-  color:var(--ion-color-primary);
+
+ion-content.background{
+  background:var(--ion-background-color);
 }
+
+.pink {
+  background:#EA047E;
+
+  color:white;
+}
+
+.purple {
+  background:#5800FF;
+
+  color:white;
+}
+
+.yellow {
+  background:#FFD36E;
+
+  color:white;
+}
+
+.orage {
+  background:#FF4949;
+
+  color:white;
+}
+
+
+
+
