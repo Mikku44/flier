@@ -20,7 +20,7 @@ export class Tab4Page implements OnInit {
   numOfSize: number;
   numOfRev: number;
   numOfSRev: number;
-
+  percent: number;
   constructor() {
     this.db = getFirestore(AppModule.app);
     this.test();
@@ -38,9 +38,10 @@ export class Tab4Page implements OnInit {
       this.numOfSent = data.numOfSent;
       this.numOfRev = data.numOfRev;
       this.numOfSRev = data.numOfSRev;
+      this.percent  = this.numOfSize*100/10240;
     } else {
       this.numOfSize = 0;
-      this.numOfSent =0;
+      this.numOfSent = 0;
       this.numOfSent = 0;
       this.numOfRev = 0;
       this.numOfSRev = 0;

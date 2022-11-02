@@ -10,12 +10,13 @@
       <ion-title size="large">History</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-card>
     <div>
       <div>Storage in used</div>
-      <div>[125 MB] from [20 GB]</div>
+      <div>{{numOfSize}}MB from 10GB/Day</div>
     </div>
-    <div><div >15%</div></div>
+    <div><div >{{percent| number:'1.2-2' }}%</div></div>
   </ion-card>
 
   <ion-card>
