@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp } from 'firebase/app';
 const firebaseConfig = {
   apiKey: 'AIzaSyBEscMM1cdV9LVavpF_Ic_OPIi-MtHJU7M',
   authDomain: 'flier-4735f.firebaseapp.com',
@@ -14,7 +14,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-const app = initializeApp(firebaseConfig);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
@@ -22,5 +22,6 @@ const app = initializeApp(firebaseConfig);
   bootstrap: [AppComponent],
 })
 export class AppModule {
-
+  static app: FirebaseApp;
+  app = initializeApp(firebaseConfig);
 }
