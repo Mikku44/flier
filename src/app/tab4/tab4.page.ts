@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { initializeApp } from 'firebase/app';
 import { AppModule } from '../app.module';
 import { doc, Firestore, getFirestore, onSnapshot } from 'firebase/firestore';
-
+import { Device, DeviceInfo } from '@capacitor/device';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -15,6 +14,8 @@ export class Tab4Page implements OnInit {
   numOfRev: number;
   numOfSRev: number;
   percent: number;
+  uid: string;
+
   constructor() {
     this.db = getFirestore(AppModule.app);
     this.test();
@@ -22,12 +23,17 @@ export class Tab4Page implements OnInit {
 
   ngOnInit() {}
 
+
   async test() {
-    const docRef = doc(this.db, 'users', 'sm-001');
+    const info = await Device.getId();
+
+    this.uid = info.uuid;
     onSnapshot(
-      doc(this.db, 'users', 'sm-001'),
+      doc(this.db, 'users', this.uid),
       { includeMetadataChanges: true },
       (data) => {
+        console.log(this.uid);
+        console.log(data.data());
         this.numOfSize = data.data().numOfSize;
         this.numOfSent = data.data().numOfSent;
         this.numOfSent = data.data().numOfSent;
@@ -36,6 +42,5 @@ export class Tab4Page implements OnInit {
         this.percent = (this.numOfSize * 100) / 10240;
       }
     );
-
   }
 }

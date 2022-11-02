@@ -2,7 +2,15 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
-import { doc, Firestore, getFirestore, onSnapshot } from 'firebase/firestore';
+import {
+  doc,
+  Firestore,
+  getFirestore,
+  onSnapshot,
+  query,
+  collection,
+  where,
+} from 'firebase/firestore';
 
 @Component({
   selector: 'app-tab3',
@@ -19,15 +27,18 @@ export class Tab3Page {
     private router: Router
   ) {
     this.db = getFirestore(AppModule.app);
-    this.callSender();
-  }
-  async callSender() {
-    const docRef = doc(this.db, 'users', 'sm-001');
-    onSnapshot(
-      doc(this.db, 'users', 'sm-001'),
-      { includeMetadataChanges: true },
-      (data) => {}
+    const q = query(
+      collection(this.db, 'files'),
+      where('receiver','==', 'test')
     );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const files = [];
+      querySnapshot.forEach((data) => {
+        files.push(data.data());
+        console.log(data.data());
+      });
+      console.log('Current files : ', files.join(', '));
+    });
   }
 
   async presentAlert() {

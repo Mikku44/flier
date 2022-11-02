@@ -90,12 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Tab4Page": () => (/* binding */ Tab4Page)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _tab4_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tab4.page.html?ngResource */ 9184);
 /* harmony import */ var _tab4_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab4.page.scss?ngResource */ 7432);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app.module */ 6747);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 1866);
+/* harmony import */ var _capacitor_device__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/device */ 4744);
+
 
 
 
@@ -106,10 +108,14 @@ let Tab4Page = class Tab4Page {
     constructor() {
         this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)(_app_module__WEBPACK_IMPORTED_MODULE_2__.AppModule.app);
         this.test();
+        const logDeviceInfo = () => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_4__.Device.getInfo();
+            console.log(info);
+        });
     }
     ngOnInit() { }
     test() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'users', 'sm-001');
             (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.onSnapshot)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'users', 'sm-001'), { includeMetadataChanges: true }, (data) => {
                 this.numOfSize = data.data().numOfSize;
@@ -123,13 +129,45 @@ let Tab4Page = class Tab4Page {
     }
 };
 Tab4Page.ctorParameters = () => [];
-Tab4Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+Tab4Page = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-tab4',
         template: _tab4_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_tab4_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], Tab4Page);
+
+
+
+/***/ }),
+
+/***/ 4758:
+/*!****************************************************************!*\
+  !*** ./node_modules/@capacitor/device/dist/esm/definitions.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+/***/ }),
+
+/***/ 4744:
+/*!**********************************************************!*\
+  !*** ./node_modules/@capacitor/device/dist/esm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Device": () => (/* binding */ Device)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 5099);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 4758);
+
+const Device = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Device', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_device_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 5168)).then(m => new m.DeviceWeb())
+});
 
 
 
