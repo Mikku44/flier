@@ -10,7 +10,6 @@
       <ion-title size="large">History</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-card>
     <div>
       <div>Storage in used</div>
@@ -22,16 +21,17 @@
   <ion-card>
     <ion-card-title>Sent</ion-card-title>
     <ion-card-content class="flex">
-      <div class="value pink">[125] MB</div>
-      <div  class="value purple">[25] MB</div>
+      <div class="value pink">{{numOfSent}} files</div>
+      <div  class="value purple">{{numOfSize}} MB</div>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-title>Receive</ion-card-title>
     <ion-card-content class="flex">
-      <div class="value yellow">[125] MB</div>
-      <div  class="value pink">[25] MB</div>
+      <div class="value yellow">{{numOfRev}} Files</div>
+      <div  class="value pink">{{numOfSRev}} MB</div>
     </ion-card-content>
   </ion-card>
+
 </ion-content>
