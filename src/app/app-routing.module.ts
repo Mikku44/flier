@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'download',
     loadChildren: () => import('./download/download.module').then( m => m.DownloadPageModule)
+  },  {
+    path: 'mycontact',
+    loadChildren: () => import('./mycontact/mycontact.module').then( m => m.MycontactPageModule)
   }
+
 ];
 @NgModule({
   imports: [

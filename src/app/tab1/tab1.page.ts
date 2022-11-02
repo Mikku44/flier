@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class Tab1Page {
   private file: File;
 
-  constructor(
+  constructor(private navCtrl: NavController
     // private http: HttpClient
     ) {}
 
@@ -24,5 +25,8 @@ export class Tab1Page {
     // this.http.post('http://localhost:8200/upload',  formData).subscribe((response) =>{
       // console.log(response);
     // });
+  }
+  gotoContactPage(){
+    this.navCtrl.navigateForward('mycontact');
   }
 }

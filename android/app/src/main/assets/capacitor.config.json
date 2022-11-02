@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "flier",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
