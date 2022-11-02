@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Camera CameraResultType, CameraSource } from '@capacitor/camera';
+import { Component, OnInit } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Share } from '@capacitor/share';
 
 @Component({
@@ -7,8 +7,8 @@ import { Share } from '@capacitor/share';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
-  captureImage: any;
+export class Tab2Page implements OnInit {
+  capturedImage: any;
   imageSrc: any;
   constructor() { }
   ngOnInit() { }
@@ -18,13 +18,13 @@ export class Tab2Page {
       quality: 90,
       source: CameraSource.Camera,
       resultType: CameraResultType.Uri
-    })
-    this.captureImage = image;
+    });
+    this.capturedImage = image;
     this.imageSrc = image.webPath;
   }
 
   async sharePicture(){
-    await Share.share({ url: this.captureImage.path });
+    await Share.share({ url: this.capturedImage.path });
   }
 
 }
