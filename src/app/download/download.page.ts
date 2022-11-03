@@ -30,7 +30,7 @@ export class DownloadPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Warning',
       subHeader: '',
-      message: 'Do you want to receive file from {other Device}?',
+      message: 'Do you want to cancel this process?',
       buttons: [
         {
           text: 'Cancel',

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import {
   doc,
+  setDoc,
   Firestore,
   getFirestore,
   onSnapshot,
@@ -21,6 +22,7 @@ export class Tab3Page {
   db: Firestore;
   handlerMessage = '';
   roleMessage = '';
+  device: string;
   component = Tab3Page;
   constructor(
     private alertController: AlertController,
@@ -29,15 +31,22 @@ export class Tab3Page {
     this.db = getFirestore(AppModule.app);
     const q = query(
       collection(this.db, 'files'),
-      where('receiver','==', 'test')
+      where('receiver', '==', 'test')
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const files = [];
       querySnapshot.forEach((data) => {
-        files.push(data.data());
-        console.log(data.data());
+        if (data.data().status === 'not') {
+          files.push(data.data().url);
+          console.log(data.data().name);// delete this
+          this.device = data.data().sender;
+        }
       });
       console.log('Current files : ', files.join(', '));
+      if (files.length > 0) {
+        this.presentAlert();
+
+      }
     });
   }
 
@@ -45,7 +54,7 @@ export class Tab3Page {
     const alert = await this.alertController.create({
       header: 'Warning',
       subHeader: '',
-      message: 'Do you want to receive file from {other Device}?',
+      message: 'Do you want to receive file from '+this.device+'?',
       buttons: [
         {
           text: 'Cancel',
@@ -69,5 +78,16 @@ export class Tab3Page {
 
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
+  }
+
+  async setData(){
+    // Add a new document in collection "cities"
+    await setDoc(doc(this.db, 'files','ho'), {
+      name: 'file.jpg',
+      status: 'not',
+      receiver: 'test',
+      url:'http://localhost.com/file.jpg',
+      sender:'sm-001'
+    });
   }
 }
