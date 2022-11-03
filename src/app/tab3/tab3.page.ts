@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import {
   doc,
+  updateDoc,
   setDoc,
   Firestore,
   getFirestore,
@@ -35,11 +36,14 @@ export class Tab3Page {
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const files = [];
+
       querySnapshot.forEach((data) => {
         if (data.data().status === 'not') {
           files.push(data.data().url);
-          console.log(data.data().name);// delete this
+          console.log(data.id);// delete this
           this.device = data.data().sender;
+          this.updateData(data.id);
+
         }
       });
       console.log('Current files : ', files.join(', '));
@@ -89,5 +93,11 @@ export class Tab3Page {
       url:'http://localhost.com/file.jpg',
       sender:'sm-001'
     });
+  }
+
+  async updateData(document: string){
+
+    const docRef = doc(this.db, 'files', document);
+    await updateDoc(docRef, { status: 'yes' });
   }
 }
