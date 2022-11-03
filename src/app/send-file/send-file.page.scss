@@ -1,0 +1,19 @@
+.icon{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+.iconsend{
+  background: var(--ion-background-color);
+  border: 1px solid white;
+  aspect-ratio: 1/1;//กำหนดขนาดสี่เหลี่ยมจัตุรัส1/1ให้เท่ากัน 16/9ผืนผ้า
+  border-radius: 100%;//ให้เป็นวงกลม ยิ่้งเยอะยิ่งกลม
+  display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  margin: 10%;
+}
+

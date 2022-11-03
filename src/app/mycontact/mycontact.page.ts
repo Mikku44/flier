@@ -16,5 +16,8 @@ export class MycontactPage implements OnInit {
   gotoPrevPage(){
     this.navCtrl.navigateBack('tabs');
   }
-
+  gotoContactPage()
+  {
+    this.navCtrl.navigateBack('send-file');
+  }
 }

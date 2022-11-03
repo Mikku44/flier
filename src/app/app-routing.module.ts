@@ -12,6 +12,10 @@ const routes: Routes = [
   },  {
     path: 'mycontact',
     loadChildren: () => import('./mycontact/mycontact.module').then( m => m.MycontactPageModule)
+  },
+  {
+    path: 'send-file',
+    loadChildren: () => import('./send-file/send-file.module').then( m => m.SendFilePageModule)
   }
 
 ];
