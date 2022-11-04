@@ -16,6 +16,14 @@ const routes: Routes = [
   {
     path: 'send-file',
     loadChildren: () => import('./send-file/send-file.module').then( m => m.SendFilePageModule)
+  },
+  {
+    path: 'upload',
+    loadChildren: () => import('./upload/upload.module').then( m => m.UploadPageModule)
+  },
+  {
+    path: 'select',
+    loadChildren: () => import('./select/select.module').then( m => m.SelectPageModule)
   }
 
 ];

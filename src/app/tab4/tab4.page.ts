@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppModule } from '../app.module';
 import { doc, Firestore, getFirestore, onSnapshot } from 'firebase/firestore';
 import { Device, DeviceInfo } from '@capacitor/device';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -16,13 +17,12 @@ export class Tab4Page implements OnInit {
   percent: number;
   uid: string;
 
-  constructor() {
+  constructor(private navCtrl: NavController) {
     this.db = getFirestore(AppModule.app);
     this.test();
   }
 
   ngOnInit() {}
-
 
   async test() {
     const info = await Device.getId();
@@ -42,5 +42,8 @@ export class Tab4Page implements OnInit {
         this.percent = (this.numOfSize * 100) / 10240;
       }
     );
+  }
+  gotoContactPage() {
+    this.navCtrl.navigateForward('mycontact');
   }
 }

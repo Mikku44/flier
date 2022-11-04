@@ -1,29 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> History </ion-title>
+    <ion-title size="large" align="center"><h1>History</h1> </ion-title>
+    <ion-buttons
+       class="contact"
+       (click)="gotoContactPage()"
+       slot="end"
+       color="light"
+     >
+       <ion-icon name="chatbubbles-outline"></ion-icon>
+     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="bg">
+<ion-content class="content" [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
+    <ion-toolbar class="content">
       <ion-title size="large">History</ion-title>
+            <ion-button
+        class="contact"
+        (click)="gotoContactPage()"
+        slot="end"
+        color="light"
+      >
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+      </ion-button>
     </ion-toolbar>
   </ion-header>
-  <ion-card><ion-card-title>Device info </ion-card-title><ion-card-content>{{uid}}</ion-card-content></ion-card>
+  <ion-card><ion-card-title>Device info </ion-card-title>
+    <ion-card-content>Device uuid: {{uid}}</ion-card-content>
+    <ion-card-content>Device name: {{uid}}</ion-card-content>
+  </ion-card>
   <ion-card>
     <div>
       <div>Storage in used</div>
       <div>{{numOfSize}}MB from 10GB/Day</div>
     </div>
-    <div><div >{{percent| number:'1.2-2' }}%</div></div>
+    <div><div>{{percent| number:'1.2-2' }}%</div></div>
   </ion-card>
 
   <ion-card>
     <ion-card-title>Sent</ion-card-title>
     <ion-card-content class="flex">
       <div class="value pink">{{numOfSent}} files</div>
-      <div  class="value purple">{{numOfSize}} MB</div>
+      <div class="value purple">{{numOfSize}} MB</div>
     </ion-card-content>
   </ion-card>
 
@@ -31,8 +50,7 @@
     <ion-card-title>Receive</ion-card-title>
     <ion-card-content class="flex">
       <div class="value yellow">{{numOfRev}} Files</div>
-      <div  class="value pink">{{numOfSRev}} MB</div>
+      <div class="value pink">{{numOfSRev}} MB</div>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

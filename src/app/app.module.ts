@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp, } from 'firebase/app';
+import { getStorage, } from 'firebase/storage';
+import { Firestore, getFirestore } from 'firebase/firestore';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +29,8 @@ const firebaseConfig = {
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  static app: FirebaseApp;
-  app = initializeApp(firebaseConfig);
+  static app: FirebaseApp = initializeApp(firebaseConfig);
+  static storage;
+  static db: Firestore = getFirestore(initializeApp(firebaseConfig));
+  storage = getStorage();
 }

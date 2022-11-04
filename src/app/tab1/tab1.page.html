@@ -1,39 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
+    <ion-buttons
+      class="contact"
+      (click)="gotoContactPage()"
+      slot="end"
+      color="light"
+    >
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title align="center"><h1> Flier </h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="content">
   <ion-header collapse="condense">
     <ion-toolbar>
+      <ion-button
+        class="contact"
+        (click)="gotoContactPage()"
+        slot="end"
+        color="light"
+      >
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+      </ion-button>
       <ion-title size="large" vertical="center" horizontal="start" class="font"
         >Flier</ion-title
       >
-      <ion-button class="contact" (click)="gotoContactPage()" color="light">
-        <ion-icon name="chatbubbles-outline"></ion-icon>
-      </ion-button>
     </ion-toolbar>
   </ion-header>
 
   <ion-fab vertical="center" horizontal="center" slot="fixed">
-    <ion-fab-button color="white">
+    <ion-button>
       <ion-icon name="laptop-outline"></ion-icon>
-    </ion-fab-button>
+    </ion-button>
   </ion-fab>
   <ion-fab class="btn" vertical="bottom" horizontal="start" slot="fixed">
     <ion-button
-      color="primary"
       expand="full"
-      (click)="submitForm()"
+      (click)="downloadPage()"
       shape="round"
-      >send files</ion-button
+      >Send</ion-button
     >
   </ion-fab>
 
   <div id="container">
     <ion-item>
-      <input type="file" (change)="onFileChange($event)" />
+      <input type="file" (change)="onFileChange($event)" required />
     </ion-item>
   </div>
 </ion-content>

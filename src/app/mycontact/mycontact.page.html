@@ -1,31 +1,34 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" (click)="gotoPrevPage()">
-      <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
+      <h1><ion-icon class="white" name="chevron-back-outline"></ion-icon></h1>
     </ion-buttons>
-    <ion-title>mycontact</ion-title>
+    <ion-title align="center" >Contact us</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="font">
+  <div class="font white">
     <ion-icon name="rocket-outline" class="icon"></ion-icon>Contact Flier
   </div>
-  <ion-textarea
-    class="textarea"
-    color="dark"
-    cols="5"
-    rows="10"
-    placeholder="Enter text, leave the textarea, come back, and type to clear"
-    [clearOnEdit]="true"
-  >
+  <ion-row class='ion-justify-content-center'>
+
+    <ion-textarea
+    #titleInput
+      class="textarea "
+      cols="5"
+      rows="10"
+      placeholder="Type something right here to tell us..."
+      [clearOnEdit]="true"
+    >
   </ion-textarea>
+</ion-row>
 
   <!-- <ion-button expand="full" shape="round" (click)="gotoPrevPage()"
     >Back</ion-button
   > -->
 
-  <ion-button expand="full" shape="round" (click)="gotoContactPage()"
+  <ion-button expand="full" shape="round" (click)="gotoContactPage(titleInput.value)"
     >Send File</ion-button
   >
 </ion-content>

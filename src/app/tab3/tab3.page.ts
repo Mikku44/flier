@@ -5,7 +5,6 @@ import { AppModule } from '../app.module';
 import {
   doc,
   updateDoc,
-  setDoc,
   Firestore,
   getFirestore,
   onSnapshot,
@@ -13,6 +12,8 @@ import {
   collection,
   where,
 } from 'firebase/firestore';
+
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -23,33 +24,33 @@ export class Tab3Page {
   db: Firestore;
   handlerMessage = '';
   roleMessage = '';
+  user = 'test';
   device: string;
   component = Tab3Page;
   constructor(
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {
     this.db = getFirestore(AppModule.app);
     const q = query(
       collection(this.db, 'files'),
-      where('receiver', '==', 'test')
+      where('receiver', '==', this.user)
     );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
+    onSnapshot(q, (querySnapshot) => {
       const files = [];
 
       querySnapshot.forEach((data) => {
         if (data.data().status === 'not') {
-          files.push(data.data().url);
-          console.log(data.id);// delete this
+          files.push(data.data().name);
+          console.log(data.id); // delete this
           this.device = data.data().sender;
-          this.updateData(data.id);
-
         }
       });
       console.log('Current files : ', files.join(', '));
       if (files.length > 0) {
         this.presentAlert();
-
       }
     });
   }
@@ -58,7 +59,7 @@ export class Tab3Page {
     const alert = await this.alertController.create({
       header: 'Warning',
       subHeader: '',
-      message: 'Do you want to receive file from '+this.device+'?',
+      message: 'Do you want to receive file from ' + this.device + '?',
       buttons: [
         {
           text: 'Cancel',
@@ -83,21 +84,10 @@ export class Tab3Page {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
-
-  async setData(){
-    // Add a new document in collection "cities"
-    await setDoc(doc(this.db, 'files','ho'), {
-      name: 'file.jpg',
-      status: 'not',
-      receiver: 'test',
-      url:'http://localhost.com/file.jpg',
-      sender:'sm-001'
-    });
+  async downloadPage() {
+    this.router.navigate(['/download']);
   }
-
-  async updateData(document: string){
-
-    const docRef = doc(this.db, 'files', document);
-    await updateDoc(docRef, { status: 'yes' });
+  gotoContactPage() {
+    this.navCtrl.navigateForward('mycontact');
   }
 }

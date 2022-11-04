@@ -24,23 +24,27 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid class="content">
-    <ion-row class="ion-justify-content-center">
-      <ion-card class="item">
-        <ion-card class="type"> </ion-card>
-        <ion-text>filename.jpg</ion-text>
+  <div class="content">
+    <ion-text>Download List</ion-text>
+    <ion-card class="item">
 
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+      <div class="flex">
+        <div class="circle">.....</div>
+        <div style="width: 100vw">
+          <ion-row class="ion-justify-content-center">{{this.file}}</ion-row
+          ><ion-row class="ion-justify-content-center ion-margin-top"
+            ><ion-progress-bar [value]="progress"></ion-progress-bar
+          ></ion-row>
+        </div>
+      </div>
+    </ion-card>
+  </div>
 
-  <ion-fab class="btn" vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab class="btn" horizontal="start" slot="fixed">
     <ion-button
       color="danger"
       expand="full"
       (click)="presentAlert()"
-      shape="round"
-      >Cancel</ion-button
-    >
+      shape="round">Cancel</ion-button>
   </ion-fab>
 </ion-content>
