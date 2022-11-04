@@ -9,6 +9,7 @@ import { AppModule } from '../app.module';
 })
 export class MycontactPage implements OnInit {
   db = AppModule.db;
+
   constructor(private navCtrl: NavController) {}
 
   ngOnInit() {}
