@@ -95,9 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tab4_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab4.page.scss?ngResource */ 7432);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app.module */ 6747);
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 1866);
-/* harmony import */ var _capacitor_device__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/device */ 4744);
+/* harmony import */ var _capacitor_device__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/device */ 4744);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/firestore */ 1866);
 
 
 
@@ -109,28 +109,57 @@ __webpack_require__.r(__webpack_exports__);
 let Tab4Page = class Tab4Page {
     constructor(navCtrl) {
         this.navCtrl = navCtrl;
-        this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)(_app_module__WEBPACK_IMPORTED_MODULE_2__.AppModule.app);
+        this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.getFirestore)(_app_module__WEBPACK_IMPORTED_MODULE_2__.AppModule.app);
         this.test();
     }
     ngOnInit() { }
     test() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_4__.Device.getId();
+            const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_3__.Device.getId();
+            const name = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_3__.Device.getInfo();
             this.uid = info.uuid;
-            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.onSnapshot)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'users', this.uid), { includeMetadataChanges: true }, (data) => {
+            this.name = name.name;
+            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.onSnapshot)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this.db, 'users', this.uid), { includeMetadataChanges: true }, (data) => {
                 console.log(this.uid);
                 console.log(data.data());
+                this.getSize();
+                this.getRev();
                 this.numOfSize = data.data().numOfSize;
                 this.numOfSent = data.data().numOfSent;
                 this.numOfSent = data.data().numOfSent;
                 this.numOfRev = data.data().numOfRev;
                 this.numOfSRev = data.data().numOfSRev;
-                this.percent = (this.numOfSize * 100) / 10240;
             });
         });
     }
     gotoContactPage() {
         this.navCtrl.navigateForward('mycontact');
+    }
+    getSize() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.collection)(this.db, 'files'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.where)('sender', '==', this.uid));
+            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.onSnapshot)(q, (querySnapshot) => {
+                querySnapshot.forEach((data) => {
+                    this.numOfSize += data.data().size / 10000;
+                    this.percent = (this.numOfSize * 100) / 1024;
+                });
+                console.log('Current files : ', this.numOfSize);
+            });
+        });
+    }
+    getRev() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.collection)(this.db, 'files'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.where)('receiver', '==', this.uid));
+            const amount = [];
+            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.onSnapshot)(q, (querySnapshot) => {
+                querySnapshot.forEach((data) => {
+                    amount.push(data.data().name);
+                    this.numOfSRev += data.data().size / 10000;
+                });
+                console.log('files : ', this.numOfRev);
+                this.numOfRev = amount.length;
+            });
+        });
     }
 };
 Tab4Page.ctorParameters = () => [
@@ -164,7 +193,7 @@ module.exports = "ion-card {\n  padding: 30px;\n  border-radius: 10px;\n}\n\n.va
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title size=\"large\" align=\"center\"><h1>History</h1> </ion-title>\r\n    <ion-buttons\r\n       class=\"contact\"\r\n       (click)=\"gotoContactPage()\"\r\n       slot=\"end\"\r\n       color=\"light\"\r\n     >\r\n       <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n     </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"content\" [fullscreen]=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"content\">\r\n      <ion-title size=\"large\">History</ion-title>\r\n            <ion-button\r\n        class=\"contact\"\r\n        (click)=\"gotoContactPage()\"\r\n        slot=\"end\"\r\n        color=\"light\"\r\n      >\r\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card><ion-card-title>Device info </ion-card-title>\r\n    <ion-card-content>Device uuid: {{uid}}</ion-card-content>\r\n    <ion-card-content>Device name: {{uid}}</ion-card-content>\r\n  </ion-card>\r\n  <ion-card>\r\n    <div>\r\n      <div>Storage in used</div>\r\n      <div>{{numOfSize}}MB from 10GB/Day</div>\r\n    </div>\r\n    <div><div>{{percent| number:'1.2-2' }}%</div></div>\r\n  </ion-card>\r\n\r\n  <ion-card>\r\n    <ion-card-title>Sent</ion-card-title>\r\n    <ion-card-content class=\"flex\">\r\n      <div class=\"value pink\">{{numOfSent}} files</div>\r\n      <div class=\"value purple\">{{numOfSize}} MB</div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card>\r\n    <ion-card-title>Receive</ion-card-title>\r\n    <ion-card-content class=\"flex\">\r\n      <div class=\"value yellow\">{{numOfRev}} Files</div>\r\n      <div class=\"value pink\">{{numOfSRev}} MB</div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n";
+module.exports = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title size=\"large\" align=\"center\"><h1>History</h1> </ion-title>\r\n    <ion-buttons\r\n       class=\"contact\"\r\n       (click)=\"gotoContactPage()\"\r\n       slot=\"end\"\r\n       color=\"light\"\r\n     >\r\n       <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n     </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"content\" [fullscreen]=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"content\">\r\n      <ion-title size=\"large\">History</ion-title>\r\n            <ion-button\r\n        class=\"contact\"\r\n        (click)=\"gotoContactPage()\"\r\n        slot=\"end\"\r\n        color=\"light\"\r\n      >\r\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card><ion-card-title>Device info </ion-card-title>\r\n    <ion-card-content>Device uuid: {{uid}}</ion-card-content>\r\n    <ion-card-content>Device name: {{name}}</ion-card-content>\r\n  </ion-card>\r\n  <ion-card>\r\n    <div>\r\n      <div>Storage in used</div>\r\n      <div>{{numOfSize | number:'1.2-2' }}MB from 10GB/Day</div>\r\n    </div>\r\n    <div><div>{{percent| number:'1.2-2' }}%</div></div>\r\n  </ion-card>\r\n\r\n  <ion-card>\r\n    <ion-card-title>Sent</ion-card-title>\r\n    <ion-card-content class=\"flex\">\r\n      <div class=\"value pink\">{{numOfSent | number:'1.0' }} files</div>\r\n      <div class=\"value purple\">{{numOfSize | number:'1.2-2' }} MB</div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card>\r\n    <ion-card-title>Receive</ion-card-title>\r\n    <ion-card-content class=\"flex\">\r\n      <div class=\"value yellow\">{{numOfRev | number:'1.0' }} Files</div>\r\n      <div class=\"value pink\">{{numOfSRev | number:'1.2-2' }} MB</div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n";
 
 /***/ })
 

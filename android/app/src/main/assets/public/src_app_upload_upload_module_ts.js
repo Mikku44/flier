@@ -90,16 +90,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "UploadPage": () => (/* binding */ UploadPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _upload_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./upload.page.html?ngResource */ 9669);
 /* harmony import */ var _upload_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload.page.scss?ngResource */ 3474);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 2816);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 2816);
 /* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/storage */ 9058);
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/app */ 6369);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/firestore */ 1866);
 /* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app.module */ 6747);
+/* harmony import */ var _services_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/file */ 1088);
+/* harmony import */ var _capacitor_device__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @capacitor/device */ 4744);
+
+
 
 
 
@@ -123,7 +127,8 @@ let UploadPage = class UploadPage {
         this.db = _app_module__WEBPACK_IMPORTED_MODULE_5__.AppModule.db;
         this.progress = 0;
         try {
-            this.file = 'll';
+            this.file = _services_file__WEBPACK_IMPORTED_MODULE_6__.GetFile.file;
+            this.name = this.file.name;
             console.log(this.file);
             this.upload();
         }
@@ -132,7 +137,7 @@ let UploadPage = class UploadPage {
         }
     }
     presentAlert() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Warning',
                 subHeader: '',
@@ -162,26 +167,30 @@ let UploadPage = class UploadPage {
         });
     }
     upload() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             const firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_3__.getApp)();
             const storage = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.getStorage)(firebaseApp, 'gs://flier-4735f.appspot.com/');
             const storageRef = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.ref)(storage, 'upload/' + this.file.name);
             this.uploadTask = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.uploadBytesResumable)(storageRef, this.file);
             // UploadTask.uploadProgress(uploadTask);
             this.uploadProgress(this.uploadTask);
+            this.getMeta(storageRef);
             const url = 'gs://flier-4735f.appspot.com/upload/' + this.file.name;
             this.setData(url);
         });
     }
     setData(fileRef) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             // Add a new document in collection "cities"
-            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this.db, 'files', `${this.file}`), {
+            console.log('this is a size' + this.size);
+            const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_7__.Device.getId();
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this.db, 'files', `${new Date().toDateString()}-${this.file.name}`), {
                 name: this.file.name,
                 status: 'not',
                 receiver: 'test',
                 url: fileRef,
-                sender: 'sm-001',
+                size: this.file.size,
+                sender: info.uuid,
             });
         });
     }
@@ -209,7 +218,7 @@ let UploadPage = class UploadPage {
         });
     }
     presentToast() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             const toast = yield this.toastController.create({
                 message: '<ion-icon name="rocket-outline"></ion-icon> Flier <ion-row class="ion-justify-content-center">Upload file success.</ion-row>',
                 duration: 1500,
@@ -218,16 +227,28 @@ let UploadPage = class UploadPage {
             yield toast.present();
         });
     }
+    getMeta(url) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+            (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.getMetadata)(url)
+                .then((metadata) => {
+                console.log(metadata);
+                this.size = metadata.size;
+            })
+                .catch((error) => {
+                // Uh-oh, an error occurred!
+            });
+        });
+    }
     ngOnInit() { }
 };
 UploadPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.AlertController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.NavController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ToastController }
 ];
-UploadPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+UploadPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-upload',
         template: _upload_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_upload_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -254,7 +275,7 @@ module.exports = ".icon {\n  font-size: 12vh;\n}\n\n.textdes {\n  font-size: 2vw
   \****************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <meta name=\"color-scheme\" content=\"light dark\" />\n  <ion-toolbar>\n    <ion-title>\n      <h1 class=\"ion-text-center\">Flier</h1>\n      <!-- <ion-icon name=\"chatbubbles-outline\"></ion-icon> -->\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Upload</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-grid>\n    <ion-row class=\"ion-justify-content-center ion-align-items-center\">\n      <ion-col>\n        <div class=\"ion-text-center\">\n          <ion-icon class=\"icon\" name=\"cloud-upload-outline\"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n    <div class=\"content\">\n      <ion-text>Upload List</ion-text>\n      <ion-card class=\"item \">\n        <div class=\"flex \">\n          <br>\n          <div class=\"circle\">.....</div>\n          <div style=\"width: 100vw\">\n            <ion-row class=\"ion-justify-content-center\">file.jpg</ion-row\n            ><ion-row class=\"ion-justify-content-center ion-margin-top\"\n              ><ion-progress-bar [value]=\"progress\"></ion-progress-bar\n            ></ion-row>\n          </div>\n        </div>\n      </ion-card>\n    </div>\n  <ion-fab class=\"btn\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-button\n      color=\"danger\"\n      expand=\"full\"\n      (click)=\"presentAlert()\"\n      shape=\"round\"\n      >Cancel</ion-button\n    >\n  </ion-fab>\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <meta name=\"color-scheme\" content=\"light dark\" />\n  <ion-toolbar>\n    <ion-title>\n      <h1 class=\"ion-text-center\">Flier</h1>\n      <!-- <ion-icon name=\"chatbubbles-outline\"></ion-icon> -->\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Upload</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-grid>\n    <ion-row class=\"ion-justify-content-center ion-align-items-center\">\n      <ion-col>\n        <div class=\"ion-text-center\">\n          <ion-icon class=\"icon\" name=\"cloud-upload-outline\"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n    <div class=\"content\">\n      <ion-text>Upload List</ion-text>\n      <ion-card class=\"item \">\n        <div class=\"flex \">\n          <br>\n          <div class=\"circle\">.....</div>\n          <div style=\"width: 100vw\">\n            <ion-row class=\"ion-justify-content-center\">{{file.name}}</ion-row\n            ><ion-row class=\"ion-justify-content-center ion-margin-top\"\n              ><ion-progress-bar [value]=\"progress\"></ion-progress-bar\n            ></ion-row>\n          </div>\n        </div>\n      </ion-card>\n    </div>\n  <ion-fab class=\"btn\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-button\n      color=\"danger\"\n      expand=\"full\"\n      (click)=\"presentAlert()\"\n      shape=\"round\"\n      >Cancel</ion-button\n    >\n  </ion-fab>\n</ion-content>\n";
 
 /***/ })
 

@@ -36,7 +36,7 @@ const routes = [
     },
     {
         path: 'upload',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_upload_upload_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./upload/upload.module */ 4494)).then(m => m.UploadPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_upload_upload_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./upload/upload.module */ 4494)).then(m => m.UploadPageModule)
     },
     {
         path: 'select',

@@ -33,7 +33,7 @@
   <ion-card>
     <div>
       <div>Storage in used</div>
-      <div>{{numOfSize}}MB from 10GB/Day</div>
+      <div>{{numOfSize | number:'1.2-2' }}MB from 10GB/Day</div>
     </div>
     <div><div>{{percent| number:'1.2-2' }}%</div></div>
   </ion-card>
@@ -41,16 +41,16 @@
   <ion-card>
     <ion-card-title>Sent</ion-card-title>
     <ion-card-content class="flex">
-      <div class="value pink">{{numOfSent}} files</div>
-      <div class="value purple">{{numOfSize}} MB</div>
+      <div class="value pink">{{numOfSent | number:'1.0' }} files</div>
+      <div class="value purple">{{numOfSize | number:'1.2-2' }} MB</div>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-title>Receive</ion-card-title>
     <ion-card-content class="flex">
-      <div class="value yellow">{{numOfRev}} Files</div>
-      <div class="value pink">{{numOfSRev}} MB</div>
+      <div class="value yellow">{{numOfRev | number:'1.0' }} Files</div>
+      <div class="value pink">{{numOfSRev | number:'1.2-2' }} MB</div>
     </ion-card-content>
   </ion-card>
 </ion-content>

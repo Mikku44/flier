@@ -12,7 +12,7 @@ import {
 } from 'firebase/firestore';
 import { AppModule } from '../app.module';
 import { GetFile } from '../services/file';
-import { getDownloadURL } from 'firebase/storage';
+import { getDownloadURL, getMetadata } from 'firebase/storage';
 import { NavController, ToastController} from '@ionic/angular';
 import { Device } from '@capacitor/device';
 
@@ -29,6 +29,7 @@ export class UploadPage implements OnInit {
   dataDirectory: string;
   uploadTask: any;
   db = AppModule.db;
+  size: number;
   public progress = 0;
   constructor(
     private alertController: AlertController,
@@ -83,18 +84,21 @@ export class UploadPage implements OnInit {
     this.uploadTask = uploadBytesResumable(storageRef, this.file);
     // UploadTask.uploadProgress(uploadTask);
     this.uploadProgress(this.uploadTask);
+    this.getMeta(storageRef);
 
     const url = 'gs://flier-4735f.appspot.com/upload/' + this.file.name;
     this.setData(url);
   }
   async setData( fileRef: string) {
     // Add a new document in collection "cities"
+    console.log('this is a size' + this.size);
     const info = await Device.getId();
     await setDoc(doc(this.db, 'files', `${new Date().toDateString()}-${this.file.name}`), {
       name: this.file.name,
       status: 'not',
       receiver: 'test',
       url: fileRef,
+      size:this.file.size,
       sender: info.uuid,
     });
   }
@@ -138,6 +142,17 @@ export class UploadPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  async getMeta(url){
+    getMetadata(url)
+      .then((metadata) => {
+        console.log(metadata);
+        this.size = metadata.size;
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
   }
   ngOnInit() {}
 }

@@ -75,6 +75,26 @@ ExploreContainerComponentModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decora
 
 /***/ }),
 
+/***/ 1088:
+/*!**********************************!*\
+  !*** ./src/app/services/file.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GetFile": () => (/* binding */ GetFile)
+/* harmony export */ });
+class GetFile {
+    constructor() { }
+    static fileCollect(fileChangeEvent) {
+        this.file = fileChangeEvent.target.files[0];
+    }
+}
+
+
+/***/ }),
+
 /***/ 4758:
 /*!****************************************************************!*\
   !*** ./node_modules/@capacitor/device/dist/esm/definitions.js ***!
