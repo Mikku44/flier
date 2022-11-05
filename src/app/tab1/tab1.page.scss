@@ -1,12 +1,61 @@
-.btn{
-  width:92%;
+.btn {
+  width: 92%;
 }
-.contact{
+.contact {
   right: 0;
   position: fixed;
 }
 
-ion-toolbar ion-icon{
+ion-toolbar ion-icon {
   font-size: 28px;
-  color:white;
+  color: white;
+}
+
+.container::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.container::before {
+  content: "Select file";
+  position: fixed;
+  display: inline-block;
+  background: var(--ion-color-primary-contrast);
+  border: 1px solid #999;
+  border-radius: 10px;
+  padding: 50px 28px;
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-size: 12pt;
+  width:70vw;
+  // height:50px;
+}
+.container:hover::before {
+  border-color: var();
+}
+
+div.select {
+  text-align: center;
+  padding: 3%;
+  border: thin solid black;
+  border-radius: 10px;
+  background: white;
+}
+
+.none{
+  background:none;
+}
+.title{
+  font-size:28px;
+  font-weight:bold;
+  padding:0px 15px;
+
+}
+.content{
+  font-size:18px;
+   padding:0px 15px;
+}
+
+.top{
+  padding-top:30px;
 }

@@ -96,9 +96,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _tab2_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tab2.page.html?ngResource */ 1748);
 /* harmony import */ var _tab2_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab2.page.scss?ngResource */ 1597);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/camera */ 4241);
 /* harmony import */ var _capacitor_share__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/share */ 8921);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
 
 
 
@@ -106,14 +108,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab2Page = class Tab2Page {
-    constructor() { }
+    constructor(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
     ngOnInit() { }
     takePicture() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_2__.Camera.getPhoto({
                 quality: 90,
                 source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_2__.CameraSource.Camera,
-                resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_2__.CameraResultType.Uri
+                resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_2__.CameraResultType.Uri,
             });
             this.capturedImage = image;
             this.imageSrc = image.webPath;
@@ -124,10 +128,15 @@ let Tab2Page = class Tab2Page {
             yield _capacitor_share__WEBPACK_IMPORTED_MODULE_3__.Share.share({ url: this.capturedImage.path });
         });
     }
+    gotoContactPage() {
+        this.navCtrl.navigateForward('mycontact');
+    }
 };
-Tab2Page.ctorParameters = () => [];
+Tab2Page.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.NavController }
+];
 Tab2Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-tab2',
         template: _tab2_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_tab2_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -241,7 +250,7 @@ const Share = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('S
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0YWIyLnBhZ2Uuc2NzcyJ9 */";
+module.exports = ".circle {\n  margin-top: 80px;\n  margin-bottom: 20px;\n  display: flex;\n  overflow: hidden;\n  border-radius: 100%;\n  aspect-ratio: 1/1;\n  align-items: center;\n}\n\nion-button.main {\n  width: 60vw;\n  height: 60vw;\n  --border-radius: 100%;\n}\n\nion-button ion-icon {\n  font-size: 50px;\n}\n\n.btnmain {\n  margin-top: 60px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjIucGFnZS5zY3NzIiwiLi5cXC4uXFwuLlxcLi5cXC4uXFxNb2JpbGUlMjBBcHBcXGZsaWVyXFxzcmNcXGFwcFxcdGFiMlxcdGFiMi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0VBQ0EsYUFBQTtFQUNBLGdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0FDQUY7O0FER0E7RUFDRSxXQUFBO0VBQ0EsWUFBQTtFQUNBLHFCQUFBO0FDQUY7O0FER0E7RUFDRSxlQUFBO0FDQUY7O0FER0E7RUFDRSxnQkFBQTtBQ0FGIiwiZmlsZSI6InRhYjIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jaXJjbGV7XHJcbiAgbWFyZ2luLXRvcDo4MHB4O1xyXG4gIG1hcmdpbi1ib3R0b206MjBweDtcclxuICBkaXNwbGF5OmZsZXg7XHJcbiAgb3ZlcmZsb3c6aGlkZGVuO1xyXG4gIGJvcmRlci1yYWRpdXM6IDEwMCU7XHJcbiAgYXNwZWN0LXJhdGlvOiAxLzE7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuaW9uLWJ1dHRvbi5tYWlue1xyXG4gIHdpZHRoOjYwdnc7XHJcbiAgaGVpZ2h0OjYwdnc7XHJcbiAgLS1ib3JkZXItcmFkaXVzOiAxMDAlO1xyXG5cclxufVxyXG5pb24tYnV0dG9uIGlvbi1pY29ue1xyXG4gIGZvbnQtc2l6ZTo1MHB4O1xyXG5cclxufVxyXG4uYnRubWFpbntcclxuICBtYXJnaW4tdG9wOjYwcHg7XHJcbn1cclxuIiwiLmNpcmNsZSB7XG4gIG1hcmdpbi10b3A6IDgwcHg7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGJvcmRlci1yYWRpdXM6IDEwMCU7XG4gIGFzcGVjdC1yYXRpbzogMS8xO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG5pb24tYnV0dG9uLm1haW4ge1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA2MHZ3O1xuICAtLWJvcmRlci1yYWRpdXM6IDEwMCU7XG59XG5cbmlvbi1idXR0b24gaW9uLWljb24ge1xuICBmb250LXNpemU6IDUwcHg7XG59XG5cbi5idG5tYWluIHtcbiAgbWFyZ2luLXRvcDogNjBweDtcbn0iXX0= */";
 
 /***/ }),
 
@@ -251,7 +260,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
   \************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>camera</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-button expand=\"full\" shape=\"round\" (click)=\"takePicture()\">\r\n    <ion-icon slot=\"start\" name=\"camera\"></ion-icon>\r\n    ถ่ายภาพ\r\n  </ion-button>\r\n\r\n  <img [src]=\"imageSrc\"/>\r\n\r\n  <ion-button *ngIf=\"capturedImage\" expand=\"full\" shape=\"round\" (click)=\"sharePicture()\">\r\n    <ion-icon slot=\"start\" name=\"share-social\"></ion-icon>\r\n    แชร์รูปภาพ\r\n  </ion-button>\r\n\r\n</ion-content>\r\n";
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title align=\"center\"><h1>Photo</h1></ion-title>\r\n      <ion-buttons\r\n      class=\"contact\"\r\n      (click)=\"gotoContactPage()\"\r\n      slot=\"end\"\r\n      color=\"light\"\r\n    >\r\n      <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n            <ion-button\r\n        class=\"contact\"\r\n        (click)=\"gotoContactPage()\"\r\n        slot=\"end\"\r\n        color=\"light\"\r\n      >\r\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\r\n    </ion-button>\r\n      <ion-title size=\"large\">Photo</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-row class=\"ion-justify-content-center btnmain\">\r\n    <ion-button *ngIf=\"!capturedImage\" class=\"main\" expand=\"full\" shape=\"round\" (click)=\"takePicture()\">\r\n      <ion-icon name=\"camera\"></ion-icon>\r\n      <!-- <h3>ถ่ายภาพ</h3> -->\r\n    </ion-button>\r\n  </ion-row>\r\n\r\n  <div class=\"circle\">\r\n    <img [src]=\"imageSrc\"/>\r\n    <!-- <img src=\"https://images.unsplash.com/photo-1667286143856-15a18c01a491?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80\" alt=\"\"> -->\r\n  </div>\r\n\r\n  <ion-button *ngIf=\"capturedImage\" expand=\"full\" shape=\"round\" (click)=\"sharePicture()\">\r\n    แชร์รูปภาพ\r\n  </ion-button>\r\n\r\n</ion-content>\r\n";
 
 /***/ })
 

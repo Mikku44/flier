@@ -16,6 +16,7 @@ export class Tab4Page implements OnInit {
   numOfSRev: number;
   percent: number;
   uid: string;
+  name: string;
 
   constructor(private navCtrl: NavController) {
     this.db = getFirestore(AppModule.app);
@@ -26,8 +27,9 @@ export class Tab4Page implements OnInit {
 
   async test() {
     const info = await Device.getId();
-
+    const name = await Device.getInfo();
     this.uid = info.uuid;
+    this.name = name.name;
     onSnapshot(
       doc(this.db, 'users', this.uid),
       { includeMetadataChanges: true },

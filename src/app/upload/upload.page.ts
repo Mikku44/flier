@@ -14,6 +14,7 @@ import { AppModule } from '../app.module';
 import { GetFile } from '../services/file';
 import { getDownloadURL } from 'firebase/storage';
 import { NavController, ToastController} from '@ionic/angular';
+import { Device } from '@capacitor/device';
 
 @Component({
   selector: 'app-upload',
@@ -22,6 +23,7 @@ import { NavController, ToastController} from '@ionic/angular';
 })
 export class UploadPage implements OnInit {
   file: any;
+  name: string;
   handlerMessage = '';
   roleMessage = '';
   dataDirectory: string;
@@ -35,7 +37,8 @@ export class UploadPage implements OnInit {
     private toastController: ToastController
   ) {
     try {
-      this.file = 'll';
+      this.file = GetFile.file;
+      this.name = this.file.name;
       console.log(this.file);
       this.upload();
     } catch (e) {
@@ -86,13 +89,13 @@ export class UploadPage implements OnInit {
   }
   async setData( fileRef: string) {
     // Add a new document in collection "cities"
-
-    await setDoc(doc(this.db, 'files', `${this.file}`), {
+    const info = await Device.getId();
+    await setDoc(doc(this.db, 'files', `${new Date().toDateString()}-${this.file.name}`), {
       name: this.file.name,
       status: 'not',
       receiver: 'test',
       url: fileRef,
-      sender: 'sm-001',
+      sender: info.uuid,
     });
   }
 

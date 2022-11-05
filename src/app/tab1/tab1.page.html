@@ -8,7 +8,7 @@
     >
       <ion-icon name="chatbubbles-outline"></ion-icon>
     </ion-buttons>
-    <ion-title align="center"><h1> Flier </h1></ion-title>
+    <ion-title align="center"><h1>Flier</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,23 +29,26 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-fab vertical="center" horizontal="center" slot="fixed">
-    <ion-button>
-      <ion-icon name="laptop-outline"></ion-icon>
-    </ion-button>
-  </ion-fab>
+  <div class="paneltop">
+      <div class="title top">Hello,</div>
+      <div class="content">Do you want to send some file?</div>
+      <ion-label id="imageName"></ion-label>
+    </div>
+
+  <script>
+        let input = document.getElementById("inputTag");
+        let imageName = document.getElementById("imageName")
+
+        input.addEventListener("change", ()=>{
+            let inputImage = document.querySelector("input[type=file]").files[0];
+
+            imageName.innerText = inputImage.name;
+        })
+    </script>
+  <ion-row class="ion-justify-content-center"><ion-card class="none"><input id="inputTag" class="container" type="file" (change)="onFileChange($event)" required /></ion-card></ion-row>
   <ion-fab class="btn" vertical="bottom" horizontal="start" slot="fixed">
-    <ion-button
-      expand="full"
-      (click)="downloadPage()"
-      shape="round"
+    <ion-button expand="full" (click)="downloadPage()" shape="round"
       >Send</ion-button
     >
   </ion-fab>
-
-  <div id="container">
-    <ion-item>
-      <input type="file" (change)="onFileChange($event)" required />
-    </ion-item>
-  </div>
 </ion-content>
